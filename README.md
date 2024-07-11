@@ -7,20 +7,20 @@ Install clang first.
 1. Clone this repo:
 
 	```bash
-	rm -rf package/helloworld
-	git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
+	rm -rf package/feeds
+	git clone --depth=1 https://github.com/me-zjc/openwrt-feeds.git package/feeds
 	```
 
 2. Pull upstream commits:
 
 	```bash
-	git -C package/helloworld pull
+	git -C package/feeds pull
 	```
 
 - Remove
 
   ```bash
-  rm -rf package/helloworld
+  rm -rf package/feeds
   ```
 
 ### Method 2 - Add this repo as a git submodule
@@ -28,23 +28,23 @@ Install clang first.
 1. Add new submodule:
 
 	```bash
-	rm -rf package/helloworld
-	git submodule add -f --name helloworld https://github.com/fw876/helloworld.git package/helloworld
+	rm -rf package/feeds
+	git submodule add -f --name feeds https://github.com/me-zjc/openwrt-feeds.git package/feeds
 	```
 
 2. Pull upstream commits:
 
 	```bash
-	git submodule update --remote package/helloworld
+	git submodule update --remote package/feeds
 	```
 
 - Remove
 
   ```bash
-  git submodule deinit -f package/helloworld
-  git rm -f package/helloworld
+  git submodule deinit -f package/feeds
+  git rm -f package/feeds
   git reset HEAD .gitmodules
-  rm -rf .git/modules{/,/package/}helloworld
+  rm -rf .git/modules{/,/package/}feeds
   ```
 
 ### Method 3 - Add this repo as an OpenWrt feed
@@ -52,21 +52,21 @@ Install clang first.
 1. Add new feed:
 
 	```bash
-	sed -i "/helloworld/d" "feeds.conf.default"
-	echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+	sed -i "/feeds/d" "feeds.conf.default"
+	echo "src-git feeds https://github.com/fw876/feeds.git" >> "feeds.conf.default"
 	```
 
 2. Pull upstream commits:
 
 	```bash
-	./scripts/feeds update helloworld
-	./scripts/feeds install -a -f -p helloworld
+	./scripts/feeds update feeds
+	./scripts/feeds install -a -f -p feeds
 	```
 
 - Remove
 
   ```bash
-  sed -i "/helloworld/d" "feeds.conf.default"
+  sed -i "/feeds/d" "feeds.conf.default"
   ./scripts/feeds clean
   ./scripts/feeds update -a
   ./scripts/feeds install -a
